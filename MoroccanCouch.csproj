@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <AssemblyName>dev.octr.morrocancouch</AssemblyName>
+    <Description>Dinkum furniture mod.</Description>
+    <Version>1.0.0</Version>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="moroccancouch" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="moroccancouch">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BepInEx.Analyzers" Version="1.*" PrivateAssets="all" />
+    <PackageReference Include="BepInEx.Unity" Version="6.0.0-*" IncludeAssets="compile" />
+    <PackageReference Include="BepInEx.PluginInfoProps" Version="1.*" />
+	<PackageReference Include="UnityEngine.Modules" Version="2023.1.0-alpha.4" IncludeAssets="compile" />
+  </ItemGroup>
+  
+  <ItemGroup Condition="'$(TargetFramework.TrimEnd(`0123456789`))' == 'net'">
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.2" PrivateAssets="all" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Reference Include="Assembly-CSharp">
+      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Dinkum\Dinkum_Data\Managed\Assembly-CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Mirror">
+      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Dinkum\Dinkum_Data\Managed\Mirror.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+</Project>
