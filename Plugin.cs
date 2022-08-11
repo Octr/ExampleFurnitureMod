@@ -31,10 +31,6 @@ namespace MoroccanCouch
         {
             LoadAssetBundle("moroccancouch");
             BuildFurniture();
-        }
-
-        void Update()
-        {
             AssignFurniture();
         }
 
@@ -57,7 +53,7 @@ namespace MoroccanCouch
 
         void AssignFurniture()
         {
-            if (NetworkMapSharer.share.localChar is null) return;
+            //if (NetworkMapSharer.share.localChar is null) return;
             if (furnitureLoaded) return;
             Logger.LogInfo("Assigning Furniture...");
 
