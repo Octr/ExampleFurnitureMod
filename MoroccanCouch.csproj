@@ -10,6 +10,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="AssetBundleSource\**" />
+    <EmbeddedResource Remove="AssetBundleSource\**" />
+    <None Remove="AssetBundleSource\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="moroccancouch" />
   </ItemGroup>
 
@@ -32,10 +38,7 @@
   
   <ItemGroup>
     <Reference Include="Assembly-CSharp">
-      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Dinkum\Dinkum_Data\Managed\Assembly-CSharp.dll</HintPath>
-    </Reference>
-    <Reference Include="Mirror">
-      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Dinkum\Dinkum_Data\Managed\Mirror.dll</HintPath>
+      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Dinkum\Dinkum_Data\Managed\publicized_assemblies\Assembly-CSharp_publicized.dll</HintPath>
     </Reference>
   </ItemGroup>
 </Project>

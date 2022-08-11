@@ -40,15 +40,19 @@ namespace MoroccanCouch
 
         void BuildFurniture()
         {
-            //var prefab = _assetBundle.LoadAsset<GameObject>("Inv_OpalShovel");
+            Logger.LogInfo("Attemping Load: Inv_Moroccan.");
             Inv_MoroccanCouch = _assetBundle.LoadAsset<GameObject>("Inv_MoroccanCouch").GetComponent<InventoryItem>();
+            Logger.LogInfo("Asset Bundle Loaded: " + Inv_MoroccanCouch.gameObject.name);
+
+            Logger.LogInfo("Attemping Load: 396 MoroccanCouch.");
             moroccanCouchTile = _assetBundle.LoadAsset<GameObject>("396 MoroccanCouch").GetComponent<TileObject>();
+            Logger.LogInfo("Asset Bundle Loaded: " + moroccanCouchTile.gameObject.name);
+
+            Logger.LogInfo("Attemping Load: 396 _MoroccanCouch.");
             moroccanCouchTileSettings = _assetBundle.LoadAsset<GameObject>("396 _MoroccanCouch").GetComponent<TileObjectSettings>();
+            Logger.LogInfo("Asset Bundle Loaded: " + moroccanCouchTileSettings.gameObject.name);
 
             _assetBundle.Unload(false);
-            Logger.LogInfo("Asset Bundle Loaded: " + Inv_MoroccanCouch.gameObject.name);
-            Logger.LogInfo("Asset Bundle Loaded: " + moroccanCouchTile.gameObject.name);
-            Logger.LogInfo("Asset Bundle Loaded: " + moroccanCouchTileSettings.gameObject.name);
         }
 
         void AssignFurniture()
@@ -61,6 +65,7 @@ namespace MoroccanCouch
             firstID = Inventory.inv.allItems.Length - 1;
 
             Inventory.inv.allItems[firstID] = Inv_MoroccanCouch;
+            Inv_MoroccanCouch.setItemId(firstID);
             Logger.LogInfo($"Loaded: {Inv_MoroccanCouch.name}");
 
             Array.Resize<TileObject>(ref WorldManager.manageWorld.allObjects, WorldManager.manageWorld.allObjects.Length + furnitureCount);
@@ -68,15 +73,27 @@ namespace MoroccanCouch
 
             WorldManager.manageWorld.allObjects[firstID] = moroccanCouchTile;
             Logger.LogInfo($"Loaded: {moroccanCouchTile.name}");
+            moroccanCouchTile.tileObjectId = firstID;
 
             Array.Resize<TileObjectSettings>(ref WorldManager.manageWorld.allObjectSettings, WorldManager.manageWorld.allObjectSettings.Length + furnitureCount);
             firstID = WorldManager.manageWorld.allObjectSettings.Length - 1;
 
             WorldManager.manageWorld.allObjectSettings[firstID] = moroccanCouchTileSettings;
             Logger.LogInfo($"Loaded: {moroccanCouchTileSettings.name}");
+            moroccanCouchTileSettings.tileObjectId = firstID;
+
+            FixCataloguAndCheat();
 
             Logger.LogInfo("Furniture Loaded.");
             furnitureLoaded = true;
+        }
+
+        public void FixCataloguAndCheat()
+        {
+            Logger.LogInfo("Attemping Collected Item Fix.");
+            CatalogueManager.manage.collectedItem = new bool[Inventory.inv.allItems.Length];
+            Logger.LogInfo("Attemping Cheat Buttons Fix.");
+            CheatScript.cheat.cheatButtons = new GameObject[Inventory.inv.allItems.Length];
         }
 
         private Stream GetEmbeddedAssetBundle(string name)
